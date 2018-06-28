@@ -3,6 +3,8 @@ require './config/environment'
 class ApplicationController < Sinatra::Base
 
   configure do
+     set :views, "app/views"  #we tell our app to look in the views.. for the ERB...
+
     enable :sessions
     set :session_secret, "owner_session"
   end
