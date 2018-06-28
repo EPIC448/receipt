@@ -1,0 +1,26 @@
+<h1>This is the Models index page.</h1>
+
+
+<p> Read up on this (what goes on here.)</p>
+
+
+<%if logged_in?%>
+
+     <h2>Welcome, User: <%= current_user.username %></h2>
+      <!-- # we use our current_user method here. -->
+      <!-- notes:  iterate to show all tweets -->
+      <%@pay_receipt.each do |pay_receipt| %>
+        <h3> Pay_receipt:  <%=pay_receipt.content%></h3>
+      <%end%>
+  <%else%>
+     <%'/login'%>
+      <!-- closes the if statament -->
+  <%end%>
+<br>
+
+<h4>Create a New pay_receipt</h4>
+    <a href="/pay_receipts/new">Create New pay_receipt</a>
+<br>
+</br>
+
+  <a href="/logout">Log Out</a>

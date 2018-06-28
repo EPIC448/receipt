@@ -6,22 +6,40 @@ class OwneRsController < ApplicationController
   end
 
 
-  # GET: /owne_rs
-
+  # GET: /sign_up
   get "/sign_up" do
-      
-    erb :"/owne_rs/index.html"
+    if !log_in?
+
+      erb :'owner/new', locals: {message: "Please sign up before you sign in"}
+    else
+     redirect to "/pay_receipts"     
+    end
+
   end
 
-  # GET: /owne_rs/new
-  get "/owne_rs/new" do
-    erb :"/owne_rs/new.html"
-  end
+  # # GET: /owne_rs/new
+  # get "/owne_rs/new" do
+  #   erb :"/owne_rs/new.html"
+  # end
 
   # POST: /owne_rs
   post "/owne_rs" do
-    redirect "/owne_rs"
+
+    if params[:username] == "" || params[:email] == "" || params[:password] == ""
+
+      redirect to '/signup'
+
+    else
+      @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
+      @user.save
+      session[:user_id] = @user.id
+      redirect "/pay_receipts"
+    end
+
   end
+
+
+  # log-in code
 
   # GET: /owne_rs/5
   get "/owne_rs/:id" do

@@ -8,6 +8,15 @@ class PayReceiptsController < ApplicationController
 
   # GET: /pay_receipts
   get "/pay_receipts" do
+     
+    if logged_in?
+      @users = current_user
+      @pay_receipts = Pay_receipt.all
+      erb :'/pay_receipts/index'
+    else
+      redirect to "/login"
+    end
+    
     erb :"/pay_receipts/index.html"
   end
 
