@@ -38,7 +38,21 @@ class OwnersController < ApplicationController
   end
 
 
-  # log-in code
+  # logged-in code
+  get '/login' do
+
+    if !logged_in?
+      erb :'/owner/login'
+    else
+      redirect '/pay_receipts'  #tweets control
+
+    end
+
+  end
+
+
+
+  # <------Edit---->
 
   # GET: /owners/5
   get "/owners/:id" do
