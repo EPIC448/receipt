@@ -1,4 +1,4 @@
-class OwneRsController < ApplicationController
+class OwnersController < ApplicationController
 
   configure do
     enable :sessions
@@ -8,7 +8,7 @@ class OwneRsController < ApplicationController
 
   # GET: /sign_up
   get "/sign_up" do
-    if !log_in?
+    if !logged_in?
 
       erb :'owner/new', locals: {message: "Please sign up before you sign in"}
     else
@@ -17,22 +17,21 @@ class OwneRsController < ApplicationController
 
   end
 
-  # # GET: /owne_rs/new
-  # get "/owne_rs/new" do
-  #   erb :"/owne_rs/new.html"
-  # end
+  # GET: /owners/new
+  get "/owners/new" do
+    erb :"/owners/new.html"
+  end
 
-  # POST: /owne_rs
-  post "/owne_rs" do
+  # POST: /owners
+  post "/owners" do
 
     if params[:username] == "" || params[:email] == "" || params[:password] == ""
 
       redirect to '/signup'
 
     else
-      @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
-      @user.save
-      session[:user_id] = @user.id
+      @owner = Owner.create(:name => params[:name], :email => params[:email], :password => params[:password])
+      session[:owner_id] = @owner_id
       redirect "/pay_receipts"
     end
 
@@ -41,23 +40,23 @@ class OwneRsController < ApplicationController
 
   # log-in code
 
-  # GET: /owne_rs/5
-  get "/owne_rs/:id" do
-    erb :"/owne_rs/show.html"
+  # GET: /owners/5
+  get "/owners/:id" do
+    erb :"/owners/show.html"
   end
 
-  # GET: /owne_rs/5/edit
-  get "/owne_rs/:id/edit" do
-    erb :"/owne_rs/edit.html"
+  # GET: /owners/5/edit
+  get "/owners/:id/edit" do
+    erb :"/owners/edit.html"
   end
 
-  # PATCH: /owne_rs/5
-  patch "/owne_rs/:id" do
-    redirect "/owne_rs/:id"
+  # PATCH: /owners/5
+  patch "/owners/:id" do
+    redirect "/owners/:id"
   end
 
-  # DELETE: /owne_rs/5/delete
-  delete "/owne_rs/:id/delete" do
-    redirect "/owne_rs"
+  # DELETE: /owners/5/delete
+  delete "/owners/:id/delete" do
+    redirect "/owners"
   end
 end
