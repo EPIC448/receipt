@@ -8,7 +8,7 @@ class PayReceiptsController < ApplicationController
 
   # GET: /pay_receipts
   get "/pay_receipts" do
-    # binding.pry   #our data is not getting here.
+     #our data is not getting here.
 
     if logged_in?
       @owners = current_user
@@ -18,7 +18,6 @@ class PayReceiptsController < ApplicationController
       redirect to "/login"
     end
 
-   
   end
 
   # GET: /pay_receipts/new

@@ -28,10 +28,9 @@ class OwnersController < ApplicationController
     if params[:name] == "" || params[:email] == "" || params[:password] == ""
 
       redirect to '/sign_up'
-
     else
       @owner = Owner.create(:name => params[:name], :email => params[:email], :password => params[:password])
-      session[:owner_id] = @owner_id
+      session[:owner_id] = @owner.id
       redirect "/pay_receipts"
     end
 
@@ -39,7 +38,7 @@ class OwnersController < ApplicationController
 
 
   # logged-in code
-  
+
   get '/login' do
     if !logged_in?
       erb :'/owner/login'
