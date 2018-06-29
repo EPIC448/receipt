@@ -8,21 +8,28 @@ class PayReceiptsController < ApplicationController
 
   # GET: /pay_receipts
   get "/pay_receipts" do
+    # binding.pry   #our data is not getting here.
 
     if logged_in?
       @owners = current_user
       @pay_receipts = Pay_receipt.all
-      erb :'/pay_receipts/index'
-    else
+      erb :"/pay_receipts/index"   
+     else
       redirect to "/login"
     end
 
-    erb :"/pay_receipts/index.html"
+   
   end
 
   # GET: /pay_receipts/new
   get "/pay_receipts/new" do
-    erb :"/pay_receipts/new.html"
+
+    if logged_in?
+      @user = current_user
+      erb :'pay_receipts/new'
+    else
+      redirect "/login"
+    end
   end
 
   # POST: /pay_receipts

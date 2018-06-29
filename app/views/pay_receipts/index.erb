@@ -1,4 +1,4 @@
-<h1>This is the Models index page.</h1>
+<h1>This is the pay_receipt Models index page.</h1>
 
 
 <p> Read up on this (what goes on here.)</p>
@@ -6,7 +6,7 @@
 
 <%if logged_in?%>
 
-     <h2>Welcome, User: <%= current_user.username %></h2>
+     <h2>Welcome, User: <%= current_user.name %></h2>
       <!-- # we use our current_user method here. -->
       <!-- notes:  iterate to show all tweets -->
       <%@pay_receipt.each do |pay_receipt| %>
