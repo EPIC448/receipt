@@ -12,7 +12,7 @@ class PayReceiptsController < ApplicationController
 
     if logged_in?
       @owners = current_user
-      @pay_receipts = Pay_receipt.all
+      @pay_receipts = PayReceipt.all
       erb :"/pay_receipts/index"   
      else
       redirect to "/login"

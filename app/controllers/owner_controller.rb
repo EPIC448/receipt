@@ -53,6 +53,7 @@ class OwnersController < ApplicationController
     owner = Owner.find_by(:name => params[:name])  # Take name to get users  name
     if owner && owner.authenticate(params[:password])
       session[:owner_id] = owner.id
+
       redirect to '/pay_receipts'
     else
       redirect to '/sign_up'
