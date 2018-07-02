@@ -1,5 +1,15 @@
 <h1>This is the show page for an individual instance of your model.</h1>
 
+     <h3>Latest pay_receipt: <%= @pay_receipt.content%></h3>
 
+<form action="/pay_receipts/<%=@pay_receipt.id%>/delete" method="post">
+<!-- we had the delete buttom in here -->
 
-<p> Read up on this (what goes on here.)</p>
+       <input type="hidden" name="_method" value="delete">
+
+   <p><a href="/pay_receipts/:id/edit">Edit Pay_Receipt</a> </p>
+
+   <p>Delete Pay_Receipt</p>
+      <input type="submit" value="Delete Pay_receipts">
+
+   </form>

@@ -33,17 +33,38 @@ class PayReceiptsController < ApplicationController
 
   # POST: /pay_receipts
   post "/pay_receipts" do
-    redirect "/pay_receipts"
+
+    @pay_receipt = PayReceipt.new(params)
+    @user = current_user
+    #check if tweet is empty.
+    # This is where we set the name for song/ it want us to pass in an hash.
+    if logged_in? && !@pay_receipt.content.blank? && @pay_receipt.save
+      @user.pay_receipts << @pay_receipt
+      redirect to "/pay_receipts/#{@pay_receipt.id}"  # target Id of specific tweets.
+    else
+      redirect "/pay_receipts/new"  #this is a route
+    end
   end
 
   # GET: /pay_receipts/5
   get "/pay_receipts/:id" do
-    erb :"/pay_receipts/show.html"
+    if logged_in?
+      @pay_receipt = PayReceipt.find_by_id(params[:id])
+    erb :"/pay_receipts/show"
+    else
+      redirect to "/login"
+    end
+
   end
 
   # GET: /pay_receipts/5/edit
   get "/pay_receipts/:id/edit" do
-    erb :"/pay_receipts/edit.html"
+    if logged_in?
+      @pay_receipt = PayReceipt.find_by_id(params[:id]) # slug helps to find by name instaed of ID
+      erb :"/pay_receipts/edit"
+    else
+      redirect to "/login"
+      end
   end
 
   # PATCH: /pay_receipts/5

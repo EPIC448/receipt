@@ -1,3 +1,13 @@
 <h1>Insert the form to edit an instance of your model here.</h1>
 
-<h4> edit writing receipt by logged in owner</h4>
+ User: <%= current_user.name %>
+#  having an issure with the id
+<form action="/pay_receipts/<%=@pay_receipt.id%>" method="Post">
+
+     <input type="hidden" name="_method" value="patch">
+
+        <h3>Edit Pay_Receipt: <input type="text" name="content" id="pay_receipt_content" value="<%= @pay_receipt.content%>"> </h3>
+
+        <input type="submit" value="submit">
+
+   </form>
