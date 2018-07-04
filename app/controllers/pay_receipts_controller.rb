@@ -11,7 +11,7 @@ class PayReceiptsController < ApplicationController
      #our data is not getting here.
 
     if logged_in?
-      @owners = current_user
+      @user = current_user
       @pay_receipts = PayReceipt.all
       erb :"/pay_receipts/index"   
      else
@@ -69,11 +69,33 @@ class PayReceiptsController < ApplicationController
 
   # PATCH: /pay_receipts/5
   patch "/pay_receipts/:id" do
-    redirect "/pay_receipts/:id"
+    @pay_receipt = PayReceipt.find(params[:id])
+
+    if logged_in? && !params[:content].blank?
+       @pay_receipt.update(content: params[:content])  
+    # :Note I can explicit with each.. but figures contains everthing already
+    @pay_receipt.save
+
+    redirect to "/pay_receipts/#{@pay_receipt.id}"  # Shows the newly updated content.
+   else
+    redirect to "/pay_receipts/#{@pay_receipt.id}/edit"  
+   end
   end
 
   # DELETE: /pay_receipts/5/delete
   delete "/pay_receipts/:id/delete" do
-    redirect "/pay_receipts"
+
+    @pay_receipt = PayReceipt.find_by_id(params[:id])
+   binding.pry  # does not like .user
+    if logged_in? && @pay_receipt.user == current_user
+      @pay_receipt.delete
+      redirect to "/pay_receipts"
+
+    else
+      redirect to "/login"
+
+    end
   end
-end
+
+
+end  #end of Pay_receipt controller
