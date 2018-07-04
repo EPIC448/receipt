@@ -59,29 +59,22 @@ class OwnersController < ApplicationController
       redirect to '/sign_up'
     end
 
+    end
+    
+    get '/logout' do
+
+    if !logged_in?
+      redirect '/'
+    else
+      # log user out by clearing the session
+
+      session.clear
+      redirect to "/login"
+    end
   end
 
 
 
-  # <------Edit---->
+end #end of the owner controller
 
-  # GET: /owners/5
-  get "/owner/:id" do
-    erb :"/owners/show.html"
-  end
 
-  # GET: /owners/5/edit
-  get "/owner/:id/edit" do
-    erb :"/owners/edit.html"
-  end
-
-  # PATCH: /owners/5
-  patch "/owner/:id" do
-    redirect "/owners/:id"
-  end
-
-  # DELETE: /owners/5/delete
-  delete "/owner/:id/delete" do
-    redirect "/owner"
-  end
-end

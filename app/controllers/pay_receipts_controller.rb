@@ -86,8 +86,8 @@ class PayReceiptsController < ApplicationController
   delete "/pay_receipts/:id/delete" do
 
     @pay_receipt = PayReceipt.find_by_id(params[:id])
-   binding.pry  # does not like .user
-    if logged_in? && @pay_receipt.user == current_user
+    # does not like .user (use the owner instead)
+    if logged_in? && @pay_receipt.owner == current_user  # Watch out for the "owner" not the "user"
       @pay_receipt.delete
       redirect to "/pay_receipts"
 
