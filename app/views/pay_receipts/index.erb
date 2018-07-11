@@ -10,7 +10,8 @@
       <!-- # we use our current_user method here. -->
       <!-- notes:  iterate to show all tweets -->
       <%@pay_receipts.each do |pay_receipt| %>
-        <h3> Pay_receipt:  <%=pay_receipt.content%></h3>
+        <a href="/pay_receipts/<%=pay_receipt.id%>"><h3> Pay_receipt:  <%=pay_receipt.content%></h3> </a>
+
       <%end%>
   <%else%>
      <%'/login'%>
